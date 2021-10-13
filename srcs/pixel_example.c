@@ -6,11 +6,11 @@
 /*   By: fnichola <fnichola@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 18:05:42 by fnichola          #+#    #+#             */
-/*   Updated: 2021/10/11 21:17:04 by fnichola         ###   ########.fr       */
+/*   Updated: 2021/10/13 19:30:33 by fnichola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../mlx/mlx.h"
+#include <mlx.h>
 
 typedef struct	s_data {
 	void	*img;

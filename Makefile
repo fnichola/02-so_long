@@ -6,7 +6,7 @@
 #    By: fnichola <fnichola@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/09 18:01:32 by fnichola          #+#    #+#              #
-#    Updated: 2021/10/12 19:29:13 by fnichola         ###   ########.fr        #
+#    Updated: 2021/10/13 21:02:22 by fnichola         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ CC = gcc
 
 CFLAGS = -Wall -Werror -Wextra
 
-SRCS = srcs/hook_example.c
+SRCS = srcs/example.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -34,10 +34,10 @@ endif
 all: $(NAME)
 
 %.o: %.c $(HEADER)
-	$(CC) $(CFLAGS) -Imlx -o $@ -c $<
+	$(CC) $(CFLAGS) -o $@ -c $<
 
 $(NAME): $(OBJS)
-	$(CC) -Lmlx -lmlx -framework OpenGL -framework AppKit $(OBJS) -o $(NAME)
+	$(CC) -lmlx -framework OpenGL -framework AppKit $(OBJS) -o $(NAME)
 
 bonus:
 	$(MAKE) WITH_BONUS=1
