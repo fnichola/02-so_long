@@ -6,7 +6,7 @@
 #    By: fnichola <fnichola@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/09 18:01:32 by fnichola          #+#    #+#              #
-#    Updated: 2021/10/13 21:02:22 by fnichola         ###   ########.fr        #
+#    Updated: 2021/10/14 10:53:23 by fnichola         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ HEADER = so_long.h
 
 CC = gcc
 
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -fsanitize=address -g
 
 SRCS = srcs/example.c
 
@@ -37,7 +37,7 @@ all: $(NAME)
 	$(CC) $(CFLAGS) -o $@ -c $<
 
 $(NAME): $(OBJS)
-	$(CC) -lmlx -framework OpenGL -framework AppKit $(OBJS) -o $(NAME)
+	$(CC) $(CFLAGS) -lmlx -framework OpenGL -framework AppKit $(OBJS) -o $(NAME)
 
 bonus:
 	$(MAKE) WITH_BONUS=1
@@ -45,7 +45,6 @@ bonus:
 clean:
 	$(RM) $(OBJS)
 	$(RM) $(BONUS_OBJS)
-	$(RM) libft.so
 
 fclean: clean
 	$(RM) $(NAME)
