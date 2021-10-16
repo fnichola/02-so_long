@@ -6,7 +6,7 @@
 #    By: fnichola <fnichola@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/09 18:01:32 by fnichola          #+#    #+#              #
-#    Updated: 2021/10/15 19:23:36 by fnichola         ###   ########.fr        #
+#    Updated: 2021/10/16 20:43:11 by fnichola         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,9 +16,14 @@ HEADER = so_long.h
 
 CC = gcc
 
-CFLAGS = -Wall -Werror -Wextra -g
+CFLAGS = -Wall -Werror -Wextra -fsanitize=address -g
 
-SRCS = srcs/example.c
+SRCS = srcs/main.c \
+	srcs/map.c \
+	srcs/render.c \
+	srcs/utilities.c \
+	gnl/get_next_line.c \
+	gnl/get_next_line_utils.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -33,9 +38,9 @@ endif
 
 all: $(NAME)
 
-%.o: %.c $(HEADER)
+%.o: %.c
 	$(CC) $(CFLAGS) -o $@ -c $<
-
+	
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) -lmlx -framework OpenGL -framework AppKit $(OBJS) -o $(NAME)
 
