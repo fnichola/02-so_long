@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fnichola <nic.flenghi@gmail.com>           +#+  +:+       +#+        */
+/*   By: fnichola <fnichola@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 14:59:05 by fnichola          #+#    #+#             */
-/*   Updated: 2021/05/25 17:52:49 by fnichola         ###   ########.fr       */
+/*   Updated: 2021/10/16 21:52:24 by fnichola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 # define ERROR -1
 # define SUCCESS 1
-# define EOF 0
+# define GNL_EOF 0
 
 char	*get_next_line(int fd);
 size_t	ft_strlen(const char *s);

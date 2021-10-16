@@ -6,7 +6,7 @@
 /*   By: fnichola <fnichola@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 20:15:37 by fnichola          #+#    #+#             */
-/*   Updated: 2021/10/16 20:34:07 by fnichola         ###   ########.fr       */
+/*   Updated: 2021/10/16 21:49:29 by fnichola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	main(void)
 
 	data.floor = &floor; 
 	data.wall = &wall;
+
+	read_map_file("map.ber");
 
 	data.mlx = mlx_init();
 	data.win = mlx_new_window(data.mlx, WIN_X, WIN_Y, "so_long");

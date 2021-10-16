@@ -6,7 +6,7 @@
 /*   By: fnichola <fnichola@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 20:08:27 by fnichola          #+#    #+#             */
-/*   Updated: 2021/10/16 20:44:23 by fnichola         ###   ########.fr       */
+/*   Updated: 2021/10/16 21:48:12 by fnichola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,13 @@ typedef enum	e_tiletype {
 	EXIT = 'E',
 }				t_tiletype;
 
-/* Struct for each tile */
+typedef struct	s_map {
+	char	**og_map;
+	int		rows;
+	int		cols;
+}				t_map;
+
+
 typedef struct	s_tile {
 	t_tiletype		type;
 	t_tiletype		og_type;
@@ -88,6 +94,7 @@ int	load_sprites(t_data *data);
 int	end_game();
 int	key_hook(int keycode, t_data *data);
 int	draw_tiles(t_data *data);
+int	read_map_file(char *map_path);
 
 #endif
 

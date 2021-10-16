@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fnichola <nic.flenghi@gmail.com>           +#+  +:+       +#+        */
+/*   By: fnichola <fnichola@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 13:52:44 by fnichola          #+#    #+#             */
-/*   Updated: 2021/05/27 16:07:02 by fnichola         ###   ########.fr       */
+/*   Updated: 2021/10/16 21:52:00 by fnichola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ int	read_and_copy_line(int fd, char *buf, char **line)
 		if (read(fd, buf, BUFFER_SIZE) < 0)
 			return (ERROR);
 	}
-	return (EOF);
+	return (GNL_EOF);
 }
 
 /**
@@ -150,7 +150,7 @@ char	*get_next_line(int fd)
 		return (NULL);
 	line[0] = 0;
 	ret = read_and_copy_line(fd, buf, &line);
-	if (ret == ERROR || (ret == EOF && ft_strlen(line) == 0))
+	if (ret == ERROR || (ret == GNL_EOF && ft_strlen(line) == 0))
 	{
 		free(line);
 		line = NULL;
