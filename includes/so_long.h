@@ -6,7 +6,7 @@
 /*   By: fnichola <fnichola@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 20:08:27 by fnichola          #+#    #+#             */
-/*   Updated: 2021/10/16 21:48:12 by fnichola         ###   ########.fr       */
+/*   Updated: 2021/10/17 22:46:08 by fnichola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ typedef struct	s_wall_img {
 typedef struct	s_data {
 	void	*mlx;
 	void	*win;
+	t_map	*map;
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
@@ -94,7 +95,7 @@ int	load_sprites(t_data *data);
 int	end_game();
 int	key_hook(int keycode, t_data *data);
 int	draw_tiles(t_data *data);
-int	read_map_file(char *map_path);
+int	read_map_file(char *map_path, t_map *map);
+void	*find_tile_img(t_data *data, int row, int col);
 
 #endif
-

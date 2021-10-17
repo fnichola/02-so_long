@@ -6,12 +6,15 @@
 /*   By: fnichola <fnichola@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 20:17:16 by fnichola          #+#    #+#             */
-/*   Updated: 2021/10/16 21:59:54 by fnichola         ###   ########.fr       */
+/*   Updated: 2021/10/17 23:20:42 by fnichola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
+/**
+ * Allocate memory and add one row to the map array. Also updates row count.
+ */
 static int	add_line_to_map(t_map *map, char *new_line)
 {
 	char **new_map;
@@ -33,30 +36,31 @@ static int	add_line_to_map(t_map *map, char *new_line)
 	return (0);
 }
 
-int	read_map_file(char *map_path)
+/**
+ * Read from map file one line at a time and save in a 2D array.
+ */
+int	read_map_file(char *map_path, t_map *map)
 {
 	int		fd;
-	t_map	map;
 	char	*new_line;
 
 	fd = open(map_path, O_RDONLY); // check for error!
-	map.og_map = (char **)malloc(sizeof(char *));
-	if (!map.og_map)
+	map->og_map = (char **)malloc(sizeof(char *));
+	if (!map->og_map)
 		end_game(); // need to return error message still
-	map.og_map[0] = NULL;
-	map.rows = 0;
+	map->og_map[0] = NULL;
+	map->rows = 0;
 	new_line = get_next_line(fd);
 	// if (!new_line) error message!
-	add_line_to_map(&map, new_line);
+	map->cols = ft_strlen(new_line) - 1;
 	while (new_line)
 	{
+		add_line_to_map(map, new_line);
 		new_line = get_next_line(fd);
-		add_line_to_map(&map, new_line);
 	}
 	close(fd);
 	return (0);
 }
-
 
 
 int	load_sprites(t_data *data)
