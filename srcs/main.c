@@ -6,7 +6,7 @@
 /*   By: fnichola <fnichola@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 20:15:37 by fnichola          #+#    #+#             */
-/*   Updated: 2021/10/21 16:45:40 by fnichola         ###   ########.fr       */
+/*   Updated: 2021/10/21 22:32:18 by fnichola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,11 @@ int	main(void)
 	data.collectable.count = 0;
 
 	read_map_file("map.ber", &map);
+	check_map(&data);
 
 	data.mlx = mlx_init();
 	data.win = mlx_new_window(data.mlx, map.cols * TILE_SIZE, map.rows * TILE_SIZE, "so_long");
-	//mlx_key_hook(data.win, key_hook, &data);
+	mlx_key_hook(data.win, key_hook, &data);
 	mlx_hook(data.win, 17, (1L<<17), end_game, &data);
 	load_sprites(&data);
 	draw_tiles(&data);

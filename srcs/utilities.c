@@ -6,7 +6,7 @@
 /*   By: fnichola <fnichola@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 20:17:22 by fnichola          #+#    #+#             */
-/*   Updated: 2021/10/21 15:51:09 by fnichola         ###   ########.fr       */
+/*   Updated: 2021/10/22 00:00:34 by fnichola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,19 @@ int	key_hook(int keycode, t_data *data)
 		mlx_destroy_window(data->mlx, data->win);
 		exit(EXIT_SUCCESS);
 	}
-	// if (keycode == 13) // W
-	// 	data->player.y -= 50;
-	// if (keycode == 0) // A
-	// 	data->player.x -=50;
-	// if (keycode == 1) // S
-	// 	data->player.y += 50;
-	// if (keycode == 2) // D
-	// 	data->player.x +=50;
-	// mlx_clear_window(data->mlx, data->win);
-	// mlx_put_image_to_window(data->mlx, data->win, data->img, data->player.x, data->player.y);
+	if (keycode == 13) // W
+		if (data->map->og_map[data->player.row - 1][data->player.col] != WALL)
+			data->player.row -= 1;
+	if (keycode == 0) // A
+		if (data->map->og_map[data->player.row][data->player.col - 1] != WALL)
+			data->player.col -= 1;
+	if (keycode == 1) // S
+		if (data->map->og_map[data->player.row + 1][data->player.col] != WALL)
+			data->player.row += 1;
+	if (keycode == 2) // D
+		if (data->map->og_map[data->player.row][data->player.col + 1] != WALL)
+			data->player.col += 1;
+	mlx_clear_window(data->mlx, data->win);
+	draw_tiles(data);
 	return (0);
 }

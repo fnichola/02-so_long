@@ -6,7 +6,7 @@
 /*   By: fnichola <fnichola@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 20:08:27 by fnichola          #+#    #+#             */
-/*   Updated: 2021/10/21 16:47:40 by fnichola         ###   ########.fr       */
+/*   Updated: 2021/10/21 22:32:50 by fnichola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,5 +100,6 @@ int	key_hook(int keycode, t_data *data);
 int	draw_tiles(t_data *data);
 int	read_map_file(char *map_path, t_map *map);
 void	*find_tile_img(t_data *data, int row, int col);
+int	check_map(t_data *data);
 
 #endif

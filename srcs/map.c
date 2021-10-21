@@ -6,11 +6,35 @@
 /*   By: fnichola <fnichola@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 20:17:16 by fnichola          #+#    #+#             */
-/*   Updated: 2021/10/21 16:48:48 by fnichola         ###   ########.fr       */
+/*   Updated: 2021/10/21 22:33:02 by fnichola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
+
+int	check_map(t_data *data)
+{
+	int r;
+	int c;
+
+	r = 0;
+	c = 0;
+	while (r < data->map->rows)
+	{
+		c = 0;
+		while (c < data->map->cols)
+		{
+			if (data->map->og_map[r][c] == PLAYER)
+			{
+				data->player.row = r;
+				data->player.col = c;
+			}
+			c++;
+		}
+		r++;
+	}
+	return (0);
+}
 
 /**
  * Allocate memory and add one row to the map array. Also updates row count.
@@ -111,4 +135,7 @@ int	load_sprites(t_data *data)
 	free(hex);
 	free(file_path);
 	return (0);
+
+
+
 }

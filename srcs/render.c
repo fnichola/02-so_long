@@ -6,7 +6,7 @@
 /*   By: fnichola <fnichola@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 20:18:25 by fnichola          #+#    #+#             */
-/*   Updated: 2021/10/21 16:51:52 by fnichola         ###   ########.fr       */
+/*   Updated: 2021/10/21 17:29:13 by fnichola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ void	*find_tile_img(t_data *data, int row, int col)
 				wall_type += (map->og_map[row][col - 1] == '1') * 1;
 			return (data->walls[wall_type]);
 		}
-	else if (map->og_map[row][col] == PLAYER)
-		return (data->player.img);
 	else if (map->og_map[row][col] == COLLECTABLE)
 		return (data->collectable.img);
 	else if (map->og_map[row][col] == EXIT)
@@ -63,5 +61,8 @@ int	draw_tiles(t_data *data)
 		}
 		r++;
 	}
+	c = data->player.col;
+	r = data->player.row;
+	mlx_put_image_to_window(data->mlx, data->win, data->player.img, c * TILE_SIZE, r * TILE_SIZE);
 	return (0);
 }
