@@ -6,7 +6,7 @@
 /*   By: fnichola <fnichola@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 20:17:16 by fnichola          #+#    #+#             */
-/*   Updated: 2021/10/17 23:20:42 by fnichola         ###   ########.fr       */
+/*   Updated: 2021/10/21 16:48:48 by fnichola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	add_line_to_map(t_map *map, char *new_line)
 	i = 0;
 	map->rows += 1;
 	new_map = (char **)malloc(sizeof(char *) * (map->rows + 1));
-	// add error handling
+	// remember to add error handling
 	while (map->og_map[i])
 	{
 		new_map[i] = map->og_map[i];
@@ -65,25 +65,50 @@ int	read_map_file(char *map_path, t_map *map)
 
 int	load_sprites(t_data *data)
 {
+	int	i;
+	char	*hex;
+	char	*file_path;
+	int		width;
+	int		height;
+	
+	hex = ft_strdup(HEX_UPPER);
+	
 	data->floor->dirt = mlx_xpm_file_to_image(data->mlx, "./assets/grass_dirt15.xpm", &(data->floor->width), &(data->floor->height));
 	if (!data->floor->dirt)
 	{
 		printf("Failed to load sprite, exiting...\n");
 		exit(EXIT_FAILURE);
 	}
-	
-	data->wall->fence_0 = mlx_xpm_file_to_image(data->mlx, "./assets/fence_0.xpm", &(data->wall->width), &(data->wall->height));
-	if (!data->wall->fence_0)
+	file_path = ft_strdup("./assets/fence_0.xpm");
+	i = 0;
+	while (i < 16)
 	{
-		printf("Failed to load sprite, exiting...\n");
+		file_path[15] = hex[i];
+		data->walls[i] = mlx_xpm_file_to_image(data->mlx, file_path, &width, &height);
+		if (!data->walls[i])
+		{
+			printf("Failed to load sprite, exiting...\n");
+			exit(EXIT_FAILURE);
+		}
+		i++;
+	}
+	data->player.img = mlx_xpm_file_to_image(data->mlx, "./assets/cat001.xpm", &width, &height);
+	if (!data->player.img)
+	{
+		printf("Failed to load character sprite, exiting...\n");
 		exit(EXIT_FAILURE);
 	}
-
-	data->wall->fence_A = mlx_xpm_file_to_image(data->mlx, "./assets/fence_A.xpm", &(data->wall->width), &(data->wall->height));
-	if (!data->wall->fence_A)
+	data->collectable.img = mlx_xpm_file_to_image(data->mlx, "./assets/apples.xpm", &width, &height);
+	if (!data->collectable.img)
 	{
-		printf("Failed to load sprite, exiting...\n");
-		exit(EXIT_FAILURE);
+		printf("Failed to load collectable sprite, exiting...\n");
 	}
+	data->exit_img = mlx_xpm_file_to_image(data->mlx, "./assets/stairs.xpm", &width, &height);
+	if (!data->player.img)
+	{
+		printf("Failed to load exit sprite, exiting...\n");
+	}
+	free(hex);
+	free(file_path);
 	return (0);
 }

@@ -6,13 +6,16 @@
 #    By: fnichola <fnichola@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/09 18:01:32 by fnichola          #+#    #+#              #
-#    Updated: 2021/10/16 20:43:11 by fnichola         ###   ########.fr        #
+#    Updated: 2021/10/18 18:08:20 by fnichola         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = so_long
 
-HEADER = so_long.h
+HEADER = includes/so_long.h
+
+LIBFT_DIR = libft
+LIBFT_LIB = $(LIBFT_DIR)/libft.a
 
 CC = gcc
 
@@ -41,8 +44,13 @@ all: $(NAME)
 %.o: %.c
 	$(CC) $(CFLAGS) -o $@ -c $<
 	
-$(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -lmlx -framework OpenGL -framework AppKit $(OBJS) -o $(NAME)
+$(NAME): $(OBJS) $(LIBFT_LIB) $(HEADER)
+	$(CC) $(CFLAGS) -lmlx -framework OpenGL -framework AppKit $(OBJS) $(LIBFT_LIB) -o $(NAME)
+
+$(LIBFT_LIB): force_look
+	$(MAKE) -C $(LIBFT_DIR)
+
+force_look: ;
 
 bonus:
 	$(MAKE) WITH_BONUS=1
@@ -56,4 +64,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re bonus force_look

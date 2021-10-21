@@ -6,7 +6,7 @@
 /*   By: fnichola <fnichola@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 20:08:27 by fnichola          #+#    #+#             */
-/*   Updated: 2021/10/17 22:46:08 by fnichola         ###   ########.fr       */
+/*   Updated: 2021/10/21 16:47:40 by fnichola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,12 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include "get_next_line.h"
+# include "../libft/libft.h"
 
 # define	WIN_X	640
 # define	WIN_Y	640
 # define	TILE_SIZE	32
-# define	HEX_UPPER	"01234567890ABCDEF"
+# define	HEX_UPPER	"0123456789ABCDEF"
 
 typedef enum	e_tiletype {
 	EMPTY = '0',
@@ -57,8 +58,9 @@ typedef struct	s_rgb {
 
 typedef struct	s_player
 {
-	int	x;
-	int	y;
+	void	*img;
+	int	row;
+	int	col;
 }				t_player;
 
 typedef struct	s_floor_img {
@@ -67,12 +69,11 @@ typedef struct	s_floor_img {
 	int		height;
 }				t_floor_img;
 
-typedef struct	s_wall_img {
-	void	*fence_0;
-	void	*fence_A;
-	int		width;
-	int		height;
-}				t_wall_img;
+typedef struct	s_collectable {
+	void	*img;
+	int		count;
+}				t_collectable;
+
 
 typedef struct	s_data {
 	void	*mlx;
@@ -86,7 +87,9 @@ typedef struct	s_data {
 	t_rgb	color;
 	t_player	player;
 	t_floor_img	*floor;
-	t_wall_img	*wall;
+	void	**walls;
+	t_collectable	collectable;
+	void	*exit_img;
 }				t_data;
 
 

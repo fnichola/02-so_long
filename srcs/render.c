@@ -6,7 +6,7 @@
 /*   By: fnichola <fnichola@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 20:18:25 by fnichola          #+#    #+#             */
-/*   Updated: 2021/10/17 23:22:46 by fnichola         ###   ########.fr       */
+/*   Updated: 2021/10/21 16:51:52 by fnichola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,35 @@
 
 void	*find_tile_img(t_data *data, int row, int col)
 {
-	char	**map;
+	t_map	*map;
+	int		wall_type;
 
-	map = data->map->og_map;
+	wall_type = 0;
+	map = data->map;
 
-	if ((map[row])[col] == '1')
-		return (data->wall->fence_0);
-	else
-		return (NULL);
+	if (map->og_map[row][col] == WALL)
+		{
+			if (row > 0)
+				wall_type += (map->og_map[row - 1][col] == '1') * (1 << 3);
+			if (col < (map->cols - 1))
+				wall_type += (map->og_map[row][col + 1] == '1') * (1 << 2);
+			if (row < (map->rows - 1))
+				wall_type += (map->og_map[row + 1][col] == '1') * (1 << 1);
+			if (col > 0)
+				wall_type += (map->og_map[row][col - 1] == '1') * 1;
+			return (data->walls[wall_type]);
+		}
+	else if (map->og_map[row][col] == PLAYER)
+		return (data->player.img);
+	else if (map->og_map[row][col] == COLLECTABLE)
+		return (data->collectable.img);
+	else if (map->og_map[row][col] == EXIT)
+		return (data->exit_img);
+	return (NULL);
 }
 
 int	draw_tiles(t_data *data)
 {
-	int	x;
-	int	y;
 	int	r;
 	int	c;
 	void	*tile_img;
@@ -47,19 +62,6 @@ int	draw_tiles(t_data *data)
 			c++;
 		}
 		r++;
-	}
-
-	x = 0;
-	y = 0;
-	while (y <= (WIN_Y - TILE_SIZE))
-	{
-		x = 0;
-		while (x <= (WIN_X - TILE_SIZE))
-		{
-			mlx_put_image_to_window(data->mlx, data->win, data->wall->fence_0, x, y);
-			x += WIN_X - TILE_SIZE;
-		}
-		y += TILE_SIZE;
 	}
 	return (0);
 }
