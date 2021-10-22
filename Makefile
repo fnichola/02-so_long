@@ -6,7 +6,7 @@
 #    By: fnichola <fnichola@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/09 18:01:32 by fnichola          #+#    #+#              #
-#    Updated: 2021/10/18 18:08:20 by fnichola         ###   ########.fr        #
+#    Updated: 2021/10/22 17:56:14 by fnichola         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,6 @@ ifdef WITH_BONUS
 OBJS += $(BONUS_OBJS)
 endif
 
-
 all: $(NAME)
 
 %.o: %.c
@@ -47,10 +46,8 @@ all: $(NAME)
 $(NAME): $(OBJS) $(LIBFT_LIB) $(HEADER)
 	$(CC) $(CFLAGS) -lmlx -framework OpenGL -framework AppKit $(OBJS) $(LIBFT_LIB) -o $(NAME)
 
-$(LIBFT_LIB): force_look
-	$(MAKE) -C $(LIBFT_DIR)
-
-force_look: ;
+$(LIBFT_LIB):
+	$(MAKE) bonus -C $(LIBFT_DIR)
 
 bonus:
 	$(MAKE) WITH_BONUS=1
@@ -58,10 +55,13 @@ bonus:
 clean:
 	$(RM) $(OBJS)
 	$(RM) $(BONUS_OBJS)
+	$(MAKE) clean -C $(LIBFT_DIR)
 
 fclean: clean
 	$(RM) $(NAME)
+	$(RM) $(LIBFT_LIB)
+
 
 re: fclean all
 
-.PHONY: all clean fclean re bonus force_look
+.PHONY: all clean fclean re bonus

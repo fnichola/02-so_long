@@ -6,7 +6,7 @@
 /*   By: fnichola <fnichola@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 20:08:27 by fnichola          #+#    #+#             */
-/*   Updated: 2021/10/21 22:32:50 by fnichola         ###   ########.fr       */
+/*   Updated: 2021/10/22 20:26:51 by fnichola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <fcntl.h>
 # include "get_next_line.h"
 # include "../libft/libft.h"
+# include <errno.h>
 
 # define	WIN_X	640
 # define	WIN_Y	640
@@ -90,6 +91,7 @@ typedef struct	s_data {
 	void	**walls;
 	t_collectable	collectable;
 	void	*exit_img;
+	int		move_count;
 }				t_data;
 
 

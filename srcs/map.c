@@ -6,7 +6,7 @@
 /*   By: fnichola <fnichola@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 20:17:16 by fnichola          #+#    #+#             */
-/*   Updated: 2021/10/21 22:33:02 by fnichola         ###   ########.fr       */
+/*   Updated: 2021/10/22 18:23:58 by fnichola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ int	check_map(t_data *data)
 			{
 				data->player.row = r;
 				data->player.col = c;
-			}
+			} else if (data->map->og_map[r][c] == COLLECTABLE)
+				data->collectable.count++;
 			c++;
 		}
 		r++;
