@@ -6,7 +6,7 @@
 /*   By: fnichola <fnichola@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 20:17:16 by fnichola          #+#    #+#             */
-/*   Updated: 2021/10/26 17:57:57 by fnichola         ###   ########.fr       */
+/*   Updated: 2021/10/26 18:54:32 by fnichola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,9 @@ int	check_map(t_data *data)
 				exit_count++;
 			if (!ft_strchr("01CPE", data->map.array[r][c]))
 				end_game("Invalid character in map.");
+			if (r == 0 || r == data->map.rows - 1 || c == 0 || c == data->map.cols - 1)
+				if (data->map.array[r][c] != WALL)
+					end_game("Map must be surrounded by walls.");
 			c++;
 		}
 		r++;
