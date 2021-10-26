@@ -6,7 +6,7 @@
 /*   By: fnichola <fnichola@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 20:17:22 by fnichola          #+#    #+#             */
-/*   Updated: 2021/10/22 20:27:30 by fnichola         ###   ########.fr       */
+/*   Updated: 2021/10/26 18:15:30 by fnichola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,29 +20,34 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-int	end_game()
+int	end_game(char *error_message)
 {
-	exit(EXIT_SUCCESS);
+	if (error_message)
+	{
+		ft_printf_fd(STDERR_FILENO, "Error\n%s\n", error_message);
+		exit(EXIT_FAILURE);
+	} else
+		exit(EXIT_SUCCESS);
 }
 
 int	check_action(t_data *data, int row, int col)
 {
-	if (data->map->og_map[row][col] != WALL)
+	if (data->map.array[row][col] != WALL)
 	{
-		if (data->map->og_map[row][col] == COLLECTABLE)
+		if (data->map.array[row][col] == COLLECTABLE)
 		{
 			data->collectable.count--;
-			data->map->og_map[row][col] = EMPTY;
+			data->map.array[row][col] = EMPTY;
 		}
-		if (data->map->og_map[row][col] == EXIT)
+		if (data->map.array[row][col] == EXIT)
 		{
 			if (data->collectable.count == 0)
 			{
-				printf("Game over!\n");
-				end_game();
+				ft_printf("You win!\n");
+				end_game(NULL);
 			}
 		}
-		printf("Moves: %d\n", ++data->move_count);
+		ft_printf("Moves: %d\n", ++data->move_count);
 		return (1);
 	}
 	return (0);
@@ -68,6 +73,6 @@ int	key_hook(int keycode, t_data *data)
 		if (check_action(data, data->player.row, data->player.col + 1))
 			data->player.col += 1;
 	mlx_clear_window(data->mlx, data->win);
-	draw_tiles(data);
+	render_screen(data);
 	return (0);
 }

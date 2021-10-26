@@ -6,7 +6,7 @@
 #    By: fnichola <fnichola@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/07 21:47:42 by fnichola          #+#    #+#              #
-#    Updated: 2021/10/18 21:13:13 by fnichola         ###   ########.fr        #
+#    Updated: 2021/10/24 21:46:43 by fnichola         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,7 +64,13 @@ BONUS_SRCS = ft_lstnew.c \
 	ft_lstdelone.c \
 	ft_lstclear.c \
 	ft_lstiter.c \
-	ft_lstmap.c
+	ft_lstmap.c \
+	ft_printf.c \
+	ft_print_num.c \
+	ft_print_unum.c \
+	ft_printf_fd.c \
+	ft_print_num_fd.c \
+	ft_print_unum_fd.c
 
 BONUS_OBJS = $(BONUS_SRCS:.c=.o)
 

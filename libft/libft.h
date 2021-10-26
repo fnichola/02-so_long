@@ -6,7 +6,7 @@
 /*   By: fnichola <fnichola@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 17:53:49 by fnichola          #+#    #+#             */
-/*   Updated: 2021/09/27 21:09:05 by fnichola         ###   ########.fr       */
+/*   Updated: 2021/10/24 21:44:39 by fnichola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@
 # include <stdlib.h>
 # include <stddef.h>
 # include <limits.h>
+# include <stdarg.h>
+
+# define DEC "0123456789"
+# define HEX_UPPER "0123456789ABCDEF"
+# define HEX_LOWER "0123456789abcdef"
 
 typedef struct s_list
 {
@@ -66,5 +71,11 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+int		ft_printf(const char *format, ...);
+int		ft_print_unum(unsigned long num, char *digits, int truncate);
+int		ft_print_num(int nbr);
+int		ft_printf_fd(int fd, const char *format, ...);
+int		ft_print_unum_fd(int fd, unsigned long num, char *digits, int truncate);
+int		ft_print_num_fd(int fd, int nbr);
 
 #endif
