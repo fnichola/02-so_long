@@ -6,52 +6,11 @@
 /*   By: fnichola <fnichola@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 20:17:16 by fnichola          #+#    #+#             */
-/*   Updated: 2021/10/26 18:54:32 by fnichola         ###   ########.fr       */
+/*   Updated: 2021/11/02 18:37:58 by fnichola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
-
-int	check_map(t_data *data)
-{
-	int r;
-	int c;
-	int	exit_count;
-	int	player_count;
-
-	r = 0;
-	c = 0;
-	exit_count = 0;
-	player_count = 0;
-	data->collectable.count = 0;
-	while (r < data->map.rows)
-	{
-		c = 0;
-		while (c < data->map.cols)
-		{
-			if (data->map.array[r][c] == PLAYER)
-			{
-				data->player.row = r;
-				data->player.col = c;
-				player_count++;
-			}
-			if (data->map.array[r][c] == COLLECTABLE)
-				data->collectable.count++;
-			if (data->map.array[r][c] == EXIT)
-				exit_count++;
-			if (!ft_strchr("01CPE", data->map.array[r][c]))
-				end_game("Invalid character in map.");
-			if (r == 0 || r == data->map.rows - 1 || c == 0 || c == data->map.cols - 1)
-				if (data->map.array[r][c] != WALL)
-					end_game("Map must be surrounded by walls.");
-			c++;
-		}
-		r++;
-	}
-	if (exit_count < 1 || player_count != 1 || data->collectable.count < 1)
-		end_game("Invalid map.");
-	return (0);
-}
 
 int	check_map_line_length(char *new_line, int expected_length)
 {
@@ -63,12 +22,28 @@ int	check_map_line_length(char *new_line, int expected_length)
 	return (new_line_length == expected_length);
 }
 
+static int	check_map_file_ext(char *map_path)
+{
+	size_t	path_length;
+	char	*ber;
+
+	path_length = ft_strlen(map_path);
+	ber = ft_strnstr(map_path, ".ber", path_length);
+	if (ber)
+	{
+		if (ber == (map_path + path_length - 4))
+			return (1);
+	}
+	end_game("Invalid map file extension. Must be '.ber'");
+	return (0);
+}
+
 /**
  * Allocate memory and add one row to the map array. Also updates row count.
  */
 static int	add_line_to_map(t_map *map, char *new_line)
 {
-	char **new_map;
+	char	**new_map;
 	size_t	i;
 
 	i = 0;
@@ -96,6 +71,7 @@ int	read_map_file(char *map_path, t_map *map)
 	int		fd;
 	char	*new_line;
 
+	check_map_file_ext(map_path);
 	fd = open(map_path, O_RDONLY);
 	if (fd < 0)
 		end_game("Couldn't open map file.");
@@ -112,58 +88,4 @@ int	read_map_file(char *map_path, t_map *map)
 	}
 	close(fd);
 	return (0);
-}
-
-
-int	load_sprites(t_data *data)
-{
-	int	i;
-	char	*hex;
-	char	*file_path;
-	int		width;
-	int		height;
-	
-	hex = ft_strdup(HEX_UPPER);
-	
-	data->floor = mlx_xpm_file_to_image(data->mlx, "./assets/grass_dirt15.xpm", &width, &height);
-	if (!data->floor)
-	{
-		ft_printf("Failed to load sprite, exiting...\n");
-		exit(EXIT_FAILURE);
-	}
-	file_path = ft_strdup("./assets/fence_0.xpm");
-	i = 0;
-	while (i < 16)
-	{
-		file_path[15] = hex[i];
-		data->walls[i] = mlx_xpm_file_to_image(data->mlx, file_path, &width, &height);
-		if (!data->walls[i])
-		{
-			ft_printf("Failed to load sprite, exiting...\n");
-			exit(EXIT_FAILURE);
-		}
-		i++;
-	}
-	data->player.img = mlx_xpm_file_to_image(data->mlx, "./assets/cat001.xpm", &width, &height);
-	if (!data->player.img)
-	{
-		ft_printf("Failed to load character sprite, exiting...\n");
-		exit(EXIT_FAILURE);
-	}
-	data->collectable.img = mlx_xpm_file_to_image(data->mlx, "./assets/apples.xpm", &width, &height);
-	if (!data->collectable.img)
-	{
-		ft_printf("Failed to load collectable sprite, exiting...\n");
-	}
-	data->exit_img = mlx_xpm_file_to_image(data->mlx, "./assets/stairs.xpm", &width, &height);
-	if (!data->player.img)
-	{
-		ft_printf("Failed to load exit sprite, exiting...\n");
-	}
-	free(hex);
-	free(file_path);
-	return (0);
-
-
-
 }

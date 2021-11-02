@@ -6,7 +6,7 @@
 /*   By: fnichola <fnichola@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 07:37:08 by nic               #+#    #+#             */
-/*   Updated: 2021/10/05 15:45:19 by fnichola         ###   ########.fr       */
+/*   Updated: 2021/11/02 15:26:02 by fnichola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /**
  * Find the first occurrence of the null-terminated string little in the
  * string big, where not more than len characters are searched.
- * Characters that appear after a `\0' character are not searched.
+ * Characters that appear after a NULL character are not searched.
  *
  * If little is an empty string, big is returned;
  * if little occurs nowhere in big, NULL is returned;

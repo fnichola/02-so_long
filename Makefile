@@ -6,7 +6,7 @@
 #    By: fnichola <fnichola@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/09 18:01:32 by fnichola          #+#    #+#              #
-#    Updated: 2021/10/26 17:26:41 by fnichola         ###   ########.fr        #
+#    Updated: 2021/11/02 18:11:32 by fnichola         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,12 +19,14 @@ LIBFT_LIB = $(LIBFT_DIR)/libft.a
 
 CC = gcc
 
-CFLAGS = -Wall -Werror -Wextra -fsanitize=address -g
+CFLAGS = -Wall -Werror -Wextra
 
 SRCS = srcs/main.c \
 	srcs/map.c \
 	srcs/render.c \
 	srcs/utilities.c \
+	srcs/load_sprites.c \
+	srcs/check_map.c \
 	gnl/get_next_line.c \
 	gnl/get_next_line_utils.c
 
@@ -40,7 +42,7 @@ endif
 
 all: $(NAME)
 
-%.o: %.c
+%.o: %.c $(HEADER)
 	$(CC) $(CFLAGS) -o $@ -c $<
 	
 $(NAME): $(OBJS) $(LIBFT_LIB) $(HEADER)
