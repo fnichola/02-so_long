@@ -6,7 +6,7 @@
 /*   By: fnichola <fnichola@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 20:08:27 by fnichola          #+#    #+#             */
-/*   Updated: 2021/11/02 17:30:10 by fnichola         ###   ########.fr       */
+/*   Updated: 2021/11/09 14:46:21 by fnichola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ typedef struct s_data {
 	void			*exit_img;
 	int				move_count;
 	t_map			map;
+	int				exit_count;
+	int				player_count;
 }				t_data;
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);

@@ -6,7 +6,7 @@
 /*   By: fnichola <fnichola@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 20:17:22 by fnichola          #+#    #+#             */
-/*   Updated: 2021/10/26 18:56:48 by fnichola         ###   ########.fr       */
+/*   Updated: 2021/11/09 14:30:24 by fnichola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	check_action(t_data *data, int row, int col)
 		{
 			if (data->collectable.count == 0)
 			{
-				ft_printf("Moves: %d\nYou win!\n", ++data->move_count);
+				ft_printf("Moves: %d\nYou won!\n", ++data->move_count);
 				end_game(NULL);
 			}
 		}

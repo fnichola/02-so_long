@@ -6,7 +6,7 @@
 /*   By: fnichola <fnichola@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 20:15:37 by fnichola          #+#    #+#             */
-/*   Updated: 2021/11/02 17:32:43 by fnichola         ###   ########.fr       */
+/*   Updated: 2021/11/06 21:27:52 by fnichola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	init_game_vars(t_data *data)
 	data->move_count = 0;
 	data->walls = malloc(sizeof(void *) * 17);
 	if (!data->walls)
-		end_game("Error allocationg memory for wall images.");
+		end_game("Error allocating memory for wall images.");
 	data->walls[16] = NULL;
 	data->map.array = malloc(sizeof(char *));
 	if (!data->map.array)
@@ -47,4 +47,5 @@ int	main(int argc, char **argv)
 	mlx_key_hook(data.win, key_hook, &data);
 	mlx_hook(data.win, 17, (1L << 17), end_game, &data);
 	mlx_loop(data.mlx);
+	return (-1);
 }
