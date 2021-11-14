@@ -6,7 +6,7 @@
 /*   By: fnichola <fnichola@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/24 15:20:01 by fnichola          #+#    #+#             */
-/*   Updated: 2021/10/24 22:00:48 by fnichola         ###   ########.fr       */
+/*   Updated: 2021/11/14 21:20:08 by fnichola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,29 +32,29 @@ static int	ft_print_str_fd(int fd, char *s)
 
 static int	eval_format(int fd, char conversion, va_list *ap)
 {
-	int	printed_char_sum;
-	
-	printed_char_sum = 0;
+	int	ret;
+
+	ret = 0;
 	if (conversion == 'c')
-		printed_char_sum += ft_print_char_fd(fd, va_arg(*ap, int));
+		ret += ft_print_char_fd(fd, va_arg(*ap, int));
 	if (conversion == 's')
-		printed_char_sum += ft_print_str_fd(fd, va_arg(*ap, char *));
+		ret += ft_print_str_fd(fd, va_arg(*ap, char *));
 	if (conversion == 'p')
 	{
-		printed_char_sum += write(fd, "0x", 2);
-		printed_char_sum += ft_print_unum_fd(fd, va_arg(*ap, unsigned long), HEX_LOWER, 0);
+		ret += write(fd, "0x", 2);
+		ret += ft_print_unum_fd(fd, va_arg(*ap, unsigned long), HEX_LOWER, 0);
 	}
 	if (conversion == 'd' || conversion == 'i')
-		printed_char_sum += ft_print_num_fd(fd, va_arg(*ap, int));
+		ret += ft_print_num_fd(fd, va_arg(*ap, int));
 	if (conversion == 'u')
-		printed_char_sum += ft_print_unum_fd(fd, va_arg(*ap, unsigned long), DEC, 1);
+		ret += ft_print_unum_fd(fd, va_arg(*ap, unsigned long), DEC, 1);
 	if (conversion == 'x')
-		printed_char_sum += ft_print_unum_fd(fd, va_arg(*ap, unsigned long), HEX_LOWER, 1);
+		ret += ft_print_unum_fd(fd, va_arg(*ap, unsigned long), HEX_LOWER, 1);
 	if (conversion == 'X')
-		printed_char_sum += ft_print_unum_fd(fd, va_arg(*ap, unsigned long), HEX_UPPER, 1);
+		ret += ft_print_unum_fd(fd, va_arg(*ap, unsigned long), HEX_UPPER, 1);
 	if (conversion == '%')
-		printed_char_sum += write(fd, "%", 1);
-	return (printed_char_sum);
+		ret += write(fd, "%", 1);
+	return (ret);
 }
 
 int	ft_printf_fd(int fd, const char *format, ...)

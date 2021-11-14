@@ -6,7 +6,7 @@
 /*   By: fnichola <fnichola@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 20:15:37 by fnichola          #+#    #+#             */
-/*   Updated: 2021/11/06 21:27:52 by fnichola         ###   ########.fr       */
+/*   Updated: 2021/11/14 20:49:32 by fnichola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ int	main(int argc, char **argv)
 	t_data		data;
 
 	if (argc != 2)
-		end_game("Incorrect number of arguments.");
+		end_game("Incorrect number of arguments.\n"\
+		"Hint: Try './so_long maps/map_OK01_simple.ber'");
 	data.mlx = mlx_init();
 	if (!data.mlx)
 		end_game("MLX initialization failed.");

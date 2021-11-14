@@ -6,7 +6,7 @@
 /*   By: fnichola <fnichola@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 20:08:27 by fnichola          #+#    #+#             */
-/*   Updated: 2021/11/09 14:46:21 by fnichola         ###   ########.fr       */
+/*   Updated: 2021/11/14 21:02:04 by fnichola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 # define SO_LONG_H
 # include <stdio.h>
 # include <stdlib.h>
-# include <mlx.h>
 # include <unistd.h>
 # include <fcntl.h>
+# include <errno.h>
 # include "get_next_line.h"
 # include "../libft/libft.h"
-# include <errno.h>
+# include "../mlx/mlx.h"
 
 # define	WIN_X	640
 # define	WIN_Y	640

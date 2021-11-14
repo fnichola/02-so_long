@@ -6,7 +6,7 @@
 /*   By: fnichola <fnichola@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 20:18:25 by fnichola          #+#    #+#             */
-/*   Updated: 2021/11/09 16:44:32 by fnichola         ###   ########.fr       */
+/*   Updated: 2021/11/14 21:10:28 by fnichola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,22 @@ void	*find_tile_img(t_data *data, int row, int col)
 	return (NULL);
 }
 
-static void put_images(t_data *data, )
+static void	put_images(t_data *data, int r, int c)
+{
+	void	*tile_img;
+
+	mlx_put_image_to_window(data->mlx, data->win, data->floor, \
+		c * TILE_SIZE, r * TILE_SIZE);
+	tile_img = find_tile_img(data, r, c);
+	if (tile_img)
+		mlx_put_image_to_window(data->mlx, data->win, tile_img, \
+			c * TILE_SIZE, r * TILE_SIZE);
+}
 
 int	render_screen(t_data *data)
 {
 	int		r;
 	int		c;
-	void	*tile_img;
 
 	r = 0;
 	c = 0;
@@ -51,12 +60,7 @@ int	render_screen(t_data *data)
 		c = 0;
 		while (c < data->map.cols)
 		{
-			mlx_put_image_to_window(data->mlx, data->win, data->floor, \
-				c * TILE_SIZE, r * TILE_SIZE);
-			tile_img = find_tile_img(data, r, c);
-			if (tile_img)
-				mlx_put_image_to_window(data->mlx, data->win, tile_img, \
-					c * TILE_SIZE, r * TILE_SIZE);
+			put_images(data, r, c);
 			c++;
 		}
 		r++;

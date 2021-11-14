@@ -6,7 +6,7 @@
 /*   By: fnichola <fnichola@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 20:17:22 by fnichola          #+#    #+#             */
-/*   Updated: 2021/11/09 14:30:24 by fnichola         ###   ########.fr       */
+/*   Updated: 2021/11/14 21:13:12 by fnichola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	char	*dst;
 
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
+	*(unsigned int *)dst = color;
 }
 
 int	end_game(char *error_message)
@@ -26,7 +26,8 @@ int	end_game(char *error_message)
 	{
 		ft_printf_fd(STDERR_FILENO, "Error\n%s\n", error_message);
 		exit(EXIT_FAILURE);
-	} else
+	}
+	else
 		exit(EXIT_SUCCESS);
 }
 
@@ -60,16 +61,16 @@ int	key_hook(int keycode, t_data *data)
 		mlx_destroy_window(data->mlx, data->win);
 		exit(EXIT_SUCCESS);
 	}
-	if (keycode == 13) // W
+	if (keycode == 13)
 		if (check_action(data, data->player.row - 1, data->player.col))
 			data->player.row -= 1;
-	if (keycode == 0) // A
+	if (keycode == 0)
 		if (check_action(data, data->player.row, data->player.col - 1))
 			data->player.col -= 1;
-	if (keycode == 1) // S
+	if (keycode == 1)
 		if (check_action(data, data->player.row + 1, data->player.col))
 			data->player.row += 1;
-	if (keycode == 2) // D
+	if (keycode == 2)
 		if (check_action(data, data->player.row, data->player.col + 1))
 			data->player.col += 1;
 	mlx_clear_window(data->mlx, data->win);

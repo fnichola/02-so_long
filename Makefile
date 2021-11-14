@@ -6,7 +6,7 @@
 #    By: fnichola <fnichola@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/09 18:01:32 by fnichola          #+#    #+#              #
-#    Updated: 2021/11/06 21:42:31 by fnichola         ###   ########.fr        #
+#    Updated: 2021/11/14 20:42:44 by fnichola         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,9 @@ HEADER = includes/so_long.h
 
 LIBFT_DIR = libft
 LIBFT_LIB = $(LIBFT_DIR)/libft.a
+
+MLX_DIR = mlx
+MLX_LIB = $(MLX_DIR)/libmlx.a
 
 CC = gcc
 
@@ -45,11 +48,14 @@ all: $(NAME)
 %.o: %.c $(HEADER)
 	$(CC) $(CFLAGS) -o $@ -c $<
 	
-$(NAME): $(OBJS) $(LIBFT_LIB) $(HEADER)
-	$(CC) $(CFLAGS) -lmlx -framework OpenGL -framework AppKit $(OBJS) $(LIBFT_LIB) -o $(NAME)
+$(NAME): $(OBJS) $(LIBFT_LIB) $(MLX_LIB) $(HEADER)
+	$(CC) $(CFLAGS) -Lmlx -lmlx -framework OpenGL -framework AppKit $(OBJS) $(LIBFT_LIB) -o $(NAME)
 
 $(LIBFT_LIB):
 	$(MAKE) bonus -C $(LIBFT_DIR)
+
+$(MLX_LIB):
+	$(MAKE) -C $(MLX_DIR)
 
 bonus:
 	$(MAKE) WITH_BONUS=1
@@ -58,10 +64,12 @@ clean:
 	$(RM) $(OBJS)
 	$(RM) $(BONUS_OBJS)
 	$(MAKE) clean -C $(LIBFT_DIR)
+	$(MAKE) clean -C $(MLX_DIR)
 
 fclean: clean
 	$(RM) $(NAME)
 	$(RM) $(LIBFT_LIB)
+	$(RM) $(MLX_LIB)
 
 
 re: fclean all
