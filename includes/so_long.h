@@ -6,7 +6,7 @@
 /*   By: fnichola <fnichola@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 20:08:27 by fnichola          #+#    #+#             */
-/*   Updated: 2021/11/16 21:57:23 by fnichola         ###   ########.fr       */
+/*   Updated: 2021/11/16 05:05:13 by fnichola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ typedef enum e_tiletype {
 	PLAYER = 'P',
 	EXIT = 'E',
 }				t_tiletype;
-
 
 # ifdef LINUX
 typedef enum e_keycode {

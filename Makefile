@@ -6,7 +6,7 @@
 #    By: fnichola <fnichola@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/09 18:01:32 by fnichola          #+#    #+#              #
-#    Updated: 2021/11/16 04:16:28 by fnichola         ###   ########.fr        #
+#    Updated: 2021/11/16 05:09:30 by fnichola         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,8 @@ MLXFLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit
 ifdef LINUX
 MLX_DIR = mlx-linux
 MLX_LIB = $(MLX_DIR)/libmlx_Linux.a
-MLXFLAGS = -lXext -lX11 -lm -D LINUX=1
+MLXFLAGS = -lXext -lX11 -lm
+CFLAGS += -D LINUX 
 endif
 
 SRCS = srcs/main.c \
