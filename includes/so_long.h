@@ -6,7 +6,7 @@
 /*   By: fnichola <fnichola@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 20:08:27 by fnichola          #+#    #+#             */
-/*   Updated: 2021/11/16 03:54:32 by fnichola         ###   ########.fr       */
+/*   Updated: 2021/11/16 21:57:23 by fnichola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,19 @@ typedef enum e_tiletype {
 
 # ifdef LINUX
 typedef enum e_keycode {
-	UP = 13,
-	DOWN = 1,
-	LEFT = 0,
-	RIGHT = 2,
-	ESC = 53,
-}				t_keycode;
-# else
-typedef enum e_keycode {
 	UP = 119,
 	DOWN = 115,
 	LEFT = 97,
 	RIGHT = 100,
 	ESC = 65307,
+}				t_keycode;
+# else
+typedef enum e_keycode {
+	UP = 13,
+	DOWN = 1,
+	LEFT = 0,
+	RIGHT = 2,
+	ESC = 53,
 }				t_keycode;
 # endif
 
