@@ -6,7 +6,7 @@
 /*   By: fnichola <fnichola@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 20:15:37 by fnichola          #+#    #+#             */
-/*   Updated: 2021/11/14 20:49:32 by fnichola         ###   ########.fr       */
+/*   Updated: 2021/11/16 03:42:55 by fnichola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,16 @@ int	main(int argc, char **argv)
 	read_map_file(argv[1], &(data.map));
 	check_map(&data);
 	load_sprites(&data);
-	data.win = mlx_new_window(data.mlx, data.map.cols * TILE_SIZE,
-			data.map.rows * TILE_SIZE, "so_long");
+	data.win = mlx_new_window(data.mlx, data.map.cols * TILE_SIZE, \
+		data.map.rows * TILE_SIZE, "so_long");
 	if (!data.win)
 		end_game("MLX couldn't create a new window.");
+	data.frame_buf = mlx_new_image(data.mlx, data.map.cols * TILE_SIZE, \
+		data.map.rows * TILE_SIZE);
 	render_screen(&data);
 	mlx_key_hook(data.win, key_hook, &data);
-	mlx_hook(data.win, 17, (1L << 17), end_game, &data);
+	mlx_hook(data.win, 17, (1L << 17), end_game, NULL);
+	mlx_hook(data.win, 12, (1L << 15), render_screen, &data);
 	mlx_loop(data.mlx);
 	return (-1);
 }

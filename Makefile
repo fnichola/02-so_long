@@ -6,7 +6,7 @@
 #    By: fnichola <fnichola@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/09 18:01:32 by fnichola          #+#    #+#              #
-#    Updated: 2021/11/14 20:42:44 by fnichola         ###   ########.fr        #
+#    Updated: 2021/11/16 04:16:28 by fnichola         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,8 +21,14 @@ MLX_DIR = mlx
 MLX_LIB = $(MLX_DIR)/libmlx.a
 
 CC = gcc
+CFLAGS = -Wall -Werror -Wextra
+MLXFLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit
 
-CFLAGS = -Wall -Werror -Wextra -g
+ifdef LINUX
+MLX_DIR = mlx-linux
+MLX_LIB = $(MLX_DIR)/libmlx_Linux.a
+MLXFLAGS = -lXext -lX11 -lm -D LINUX=1
+endif
 
 SRCS = srcs/main.c \
 	srcs/map.c \
@@ -35,30 +41,19 @@ SRCS = srcs/main.c \
 
 OBJS = $(SRCS:.c=.o)
 
-BONUS_SRCS = 
-
-BONUS_OBJS = $(BONUS_SRCS:.c=.o)
-
-ifdef WITH_BONUS
-OBJS += $(BONUS_OBJS)
-endif
-
 all: $(NAME)
 
 %.o: %.c $(HEADER)
 	$(CC) $(CFLAGS) -o $@ -c $<
 	
 $(NAME): $(OBJS) $(LIBFT_LIB) $(MLX_LIB) $(HEADER)
-	$(CC) $(CFLAGS) -Lmlx -lmlx -framework OpenGL -framework AppKit $(OBJS) $(LIBFT_LIB) -o $(NAME)
+	$(CC) $(CFLAGS) $(MLXFLAGS) $(OBJS) $(LIBFT_LIB) $(MLX_LIB) -o $(NAME)
 
 $(LIBFT_LIB):
 	$(MAKE) bonus -C $(LIBFT_DIR)
 
 $(MLX_LIB):
 	$(MAKE) -C $(MLX_DIR)
-
-bonus:
-	$(MAKE) WITH_BONUS=1
 
 clean:
 	$(RM) $(OBJS)

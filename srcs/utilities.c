@@ -6,7 +6,7 @@
 /*   By: fnichola <fnichola@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 20:17:22 by fnichola          #+#    #+#             */
-/*   Updated: 2021/11/14 21:13:12 by fnichola         ###   ########.fr       */
+/*   Updated: 2021/11/16 01:46:50 by fnichola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,21 +56,21 @@ int	check_action(t_data *data, int row, int col)
 
 int	key_hook(int keycode, t_data *data)
 {
-	if (keycode == 53)
+	if (keycode == ESC)
 	{
 		mlx_destroy_window(data->mlx, data->win);
 		exit(EXIT_SUCCESS);
 	}
-	if (keycode == 13)
+	if (keycode == UP) //up
 		if (check_action(data, data->player.row - 1, data->player.col))
 			data->player.row -= 1;
-	if (keycode == 0)
+	if (keycode == LEFT) //left
 		if (check_action(data, data->player.row, data->player.col - 1))
 			data->player.col -= 1;
-	if (keycode == 1)
+	if (keycode == DOWN) //down
 		if (check_action(data, data->player.row + 1, data->player.col))
 			data->player.row += 1;
-	if (keycode == 2)
+	if (keycode == RIGHT) //right
 		if (check_action(data, data->player.row, data->player.col + 1))
 			data->player.col += 1;
 	mlx_clear_window(data->mlx, data->win);
