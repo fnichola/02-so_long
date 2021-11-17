@@ -6,7 +6,7 @@
 /*   By: fnichola <fnichola@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 20:08:27 by fnichola          #+#    #+#             */
-/*   Updated: 2021/11/16 05:05:13 by fnichola         ###   ########.fr       */
+/*   Updated: 2021/11/17 17:58:03 by fnichola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,13 +106,14 @@ typedef struct s_data {
 	int				player_count;
 }				t_data;
 
-//void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 int		load_sprites(t_data *data);
 int		key_hook(int keycode, t_data *data);
 int		render_screen(t_data *data);
 int		read_map_file(char *map_path, t_map *map);
 void	*find_tile_img(t_data *data, int row, int col);
 int		check_map(t_data *data);
+int		end_game(char *error_message);
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 int		end_game(char *error_message);
 
 #endif
