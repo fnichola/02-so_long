@@ -6,13 +6,16 @@
 #    By: fnichola <fnichola@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/09 18:01:32 by fnichola          #+#    #+#              #
-#    Updated: 2021/11/18 20:53:48 by fnichola         ###   ########.fr        #
+#    Updated: 2021/11/18 21:28:05 by fnichola         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # MiniLibx will automatically compile.
 # Run 'make' if on MacOS
 # Run 'make LINUX=1' if on Linux.
+#
+# If on Debian/Linux, install other dependencies with:
+# sudo apt install gcc make xorg libxext-dev libbsd-dev
 
 NAME = so_long
 

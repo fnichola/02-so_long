@@ -6,7 +6,7 @@
 /*   By: fnichola <fnichola@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 20:15:37 by fnichola          #+#    #+#             */
-/*   Updated: 2021/11/18 20:45:56 by fnichola         ###   ########.fr       */
+/*   Updated: 2021/11/18 21:43:15 by fnichola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 		end_game("Incorrect number of arguments.\n"\
-		"Hint: Try './so_long maps/map_OK01_simple.ber'");
+		"Hint: Try './so_long maps/OK01_simple.ber'");
 	init_game_vars(&data);
 	read_map_file(argv[1], &(data.map));
 	check_map(&data);
