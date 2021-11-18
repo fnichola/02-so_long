@@ -6,7 +6,7 @@
 /*   By: fnichola <fnichola@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 20:08:27 by fnichola          #+#    #+#             */
-/*   Updated: 2021/11/17 17:58:03 by fnichola         ###   ########.fr       */
+/*   Updated: 2021/11/18 20:52:26 by fnichola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@
 # include "../libft/libft.h"
 # include "../mlx-linux/mlx.h"
 
-# define	WIN_X	640
-# define	WIN_Y	640
-# define	TILE_SIZE	32
-# define	HEX_UPPER	"0123456789ABCDEF"
+# define WIN_X	640
+# define WIN_Y	640
+# define TILE_SIZE	32
+# define HEX_UPPER	"0123456789ABCDEF"
 
 typedef enum e_tiletype {
 	EMPTY = '0',
@@ -35,6 +35,7 @@ typedef enum e_tiletype {
 }				t_tiletype;
 
 # ifdef LINUX
+
 typedef enum e_keycode {
 	UP = 119,
 	DOWN = 115,
@@ -43,6 +44,7 @@ typedef enum e_keycode {
 	ESC = 65307,
 }				t_keycode;
 # else
+
 typedef enum e_keycode {
 	UP = 13,
 	DOWN = 1,
@@ -58,21 +60,10 @@ typedef struct s_map {
 	int		cols;
 }				t_map;
 
-typedef struct s_tile {
-	t_tiletype		type;
-	t_tiletype		og_type;
-	void			*img;
-	struct s_tile	*up;
-	struct s_tile	*down;
-	struct s_tile	*left;
-	struct s_tile	*right;
-}				t_tile;
-
-typedef struct s_rgb {
-	long	red;
-	long	green;
-	long	blue;
-}				t_rgb;
+typedef struct s_collectable {
+	void	*img;
+	int		count;
+}				t_collectable;
 
 typedef struct s_player
 {
@@ -80,11 +71,6 @@ typedef struct s_player
 	int		row;
 	int		col;
 }				t_player;
-
-typedef struct s_collectable {
-	void	*img;
-	int		count;
-}				t_collectable;
 
 typedef struct s_data {
 	void			*mlx;
@@ -94,26 +80,28 @@ typedef struct s_data {
 	int				bits_per_pixel;
 	int				line_length;
 	int				endian;
-	t_rgb			color;
 	t_player		player;
 	void			*floor;
 	void			**walls;
 	t_collectable	collectable;
 	void			*exit_img;
 	int				move_count;
-	t_map			map;
 	int				exit_count;
 	int				player_count;
+	t_map			map;
 }				t_data;
 
-int		load_sprites(t_data *data);
-int		key_hook(int keycode, t_data *data);
-int		render_screen(t_data *data);
-int		read_map_file(char *map_path, t_map *map);
-void	*find_tile_img(t_data *data, int row, int col);
-int		check_map(t_data *data);
-int		end_game(char *error_message);
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-int		end_game(char *error_message);
+int				read_map_file(char *map_path, t_map *map);
+int				check_map(t_data *data);
+int				check_map_file_ext(char *map_path);
+int				check_map_line_length(char *new_line, int expected_length);
+int				load_sprites(t_data *data);
+void			setup_event_hooks(t_data *data);
+int				key_hook(int keycode, t_data *data);
+void			*find_tile_img(t_data *data, int row, int col);
+unsigned int	get_pixel_from_img(int x, int y, void *img);
+void			put_pixel_to_frame_buf(t_data *data, int x, int y, int color);
+int				render_screen(t_data *data);
+int				end_game(char *error_message);
 
 #endif

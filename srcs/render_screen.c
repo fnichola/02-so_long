@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render.c                                           :+:      :+:    :+:   */
+/*   render_screen.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fnichola <fnichola@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 20:18:25 by fnichola          #+#    #+#             */
-/*   Updated: 2021/11/17 18:01:10 by fnichola         ###   ########.fr       */
+/*   Updated: 2021/11/18 20:50:37 by fnichola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static void	put_image_to_frame_buf(t_data *data, void *img, int r, int c)
 {
 	int	x;
 	int	y;
+	int	pixel;
 
 	x = 0;
 	y = 0;
@@ -24,8 +25,10 @@ static void	put_image_to_frame_buf(t_data *data, void *img, int r, int c)
 		x = 0;
 		while (x < TILE_SIZE)
 		{
-			my_mlx_pixel_put(data, (c * TILE_SIZE) + x, \
-				(r * TILE_SIZE) + y, my_mlx_pixel_get(x, y, img));
+			pixel = get_pixel_from_img(x, y, img);
+			if (!(pixel & (0xFF << 24)))
+				put_pixel_to_frame_buf(data, (c * TILE_SIZE) + x, \
+					(r * TILE_SIZE) + y, pixel);
 			x++;
 		}
 		y++;

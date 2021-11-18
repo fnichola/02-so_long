@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utilities.c                                        :+:      :+:    :+:   */
+/*   pixel_utilities.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fnichola <fnichola@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/16 20:17:22 by fnichola          #+#    #+#             */
-/*   Updated: 2021/11/17 08:25:27 by fnichola         ###   ########.fr       */
+/*   Created: 2021/11/18 18:09:04 by fnichola          #+#    #+#             */
+/*   Updated: 2021/11/18 20:50:35 by fnichola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+void	put_pixel_to_frame_buf(t_data *data, int x, int y, int color)
 {
 	char	*dst;
 
@@ -20,13 +20,15 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-int	end_game(char *error_message)
+unsigned int	get_pixel_from_img(int x, int y, void *img)
 {
-	if (error_message)
-	{
-		ft_printf_fd(STDERR_FILENO, "Error\n%s\n", error_message);
-		exit(EXIT_FAILURE);
-	}
-	else
-		exit(EXIT_SUCCESS);
+	char	*src;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+
+	addr = mlx_get_data_addr(img, &bits_per_pixel, &line_length, &endian);
+	src = addr + (y * line_length + x * (bits_per_pixel / 8));
+	return (*(unsigned int *)src);
 }

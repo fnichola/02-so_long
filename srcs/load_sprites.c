@@ -6,7 +6,7 @@
 /*   By: fnichola <fnichola@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 17:40:30 by fnichola          #+#    #+#             */
-/*   Updated: 2021/11/09 16:33:11 by fnichola         ###   ########.fr       */
+/*   Updated: 2021/11/18 21:09:11 by fnichola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static void	load_collectable_sprite(t_data *data)
 	int		height;
 
 	data->collectable.img = mlx_xpm_file_to_image(data->mlx, \
-		"./assets/apples.xpm", &width, &height);
+		"./assets/fish.xpm", &width, &height);
 	if (!data->collectable.img)
 		end_game("Failed to load collectable sprite.");
 }

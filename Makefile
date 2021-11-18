@@ -6,9 +6,13 @@
 #    By: fnichola <fnichola@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/09 18:01:32 by fnichola          #+#    #+#              #
-#    Updated: 2021/11/16 05:09:30 by fnichola         ###   ########.fr        #
+#    Updated: 2021/11/18 20:53:48 by fnichola         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+# MiniLibx will automatically compile.
+# Run 'make' if on MacOS
+# Run 'make LINUX=1' if on Linux.
 
 NAME = so_long
 
@@ -22,7 +26,7 @@ MLX_LIB = $(MLX_DIR)/libmlx.a
 
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra
-MLXFLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit
+MLXFLAGS = -framework OpenGL -framework AppKit
 
 ifdef LINUX
 MLX_DIR = mlx-linux
@@ -32,11 +36,12 @@ CFLAGS += -D LINUX
 endif
 
 SRCS = srcs/main.c \
-	srcs/map.c \
-	srcs/render.c \
-	srcs/utilities.c \
+	srcs/read_map.c \
+	srcs/render_screen.c \
+	srcs/pixel_utilities.c \
 	srcs/load_sprites.c \
 	srcs/check_map.c \
+	srcs/game_control.c \
 	gnl/get_next_line.c \
 	gnl/get_next_line_utils.c
 

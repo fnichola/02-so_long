@@ -6,37 +6,11 @@
 /*   By: fnichola <fnichola@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 20:17:16 by fnichola          #+#    #+#             */
-/*   Updated: 2021/11/02 18:37:58 by fnichola         ###   ########.fr       */
+/*   Updated: 2021/11/18 18:14:09 by fnichola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
-
-int	check_map_line_length(char *new_line, int expected_length)
-{
-	int	new_line_length;
-
-	new_line_length = ft_strlen(new_line);
-	if (ft_strchr(new_line, '\n'))
-		new_line_length -= 1;
-	return (new_line_length == expected_length);
-}
-
-static int	check_map_file_ext(char *map_path)
-{
-	size_t	path_length;
-	char	*ber;
-
-	path_length = ft_strlen(map_path);
-	ber = ft_strnstr(map_path, ".ber", path_length);
-	if (ber)
-	{
-		if (ber == (map_path + path_length - 4))
-			return (1);
-	}
-	end_game("Invalid map file extension. Must be '.ber'");
-	return (0);
-}
 
 /**
  * Allocate memory and add one row to the map array. Also updates row count.
